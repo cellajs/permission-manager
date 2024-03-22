@@ -1,0 +1,35 @@
+{
+  "name": "@cellajs/permission-manager",
+  "version": "0.1.2",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cellajs/permission-manager.git"
+  },
+  "description": "Permission manager",
+  "author": "CellaJS <info@cellajs.com>",
+  "homepage": "https://cellajs.com",
+  "keywords": ["abac", "rbac","typescript"],
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": ["dist", "src"],
+  "scripts": {
+    "build": "tsup src/index.ts",
+    "dev": "tsup --watch --onSuccess \"tsx dist/index.cjs\"",
+    "check": "npx @biomejs/biome check .",
+    "check:fix": "npx @biomejs/biome check --apply ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.6.2",
+    "@evilmartians/lefthook": "^1.6.7",
+    "@types/node": "^20.11.30"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.3"
+  },
+  "bugs": {
+    "url": "https://github.com/cellajs/imado/issues"
+  }
+}
