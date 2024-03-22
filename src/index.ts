@@ -114,7 +114,7 @@ export abstract class MembershipAdapter {
    * @returns {Membership[]} The adapted array of memberships.
    * @abstract
    */
-  
+
   abstract adapt(memberships: any[]): Membership[];
 }
 
@@ -1244,7 +1244,7 @@ export class PermissionManager {
 
     // Iterate through the subject's sorted ancestors
     subjectEntity?.descSortedAncestors.forEach((ancestor) => {
-      let ancestorKey = subject.ancestors[ancestor.name] || ancestors[ancestor.name];
+      const ancestorKey = subject.ancestors[ancestor.name] || ancestors[ancestor.name];
 
       if (ancestorKey) {
         // Retrieve membership from grouped memberships
@@ -1314,7 +1314,7 @@ export class PermissionManager {
 
     // Iterate through the subject's sorted ancestors
     subjectEntity?.descSortedAncestors.forEach((ancestor) => {
-      let ancestorKey = subject.ancestors[ancestor.name] || ancestors[ancestor.name];
+      const ancestorKey = subject.ancestors[ancestor.name] || ancestors[ancestor.name];
 
       if (ancestorKey) {
         // Retrieve membership from grouped memberships

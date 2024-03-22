@@ -23,8 +23,7 @@ We differentiate between a context and a product:
 - A product doesn't have roles and represents entities that can be created by actors.
 
 ### Example Usage
-
-![App structure](img/structure.png)
+<img src="./.github/structure.png" />
 
 ```typescript
 import { Context, Product } from './src/PermissionManager';

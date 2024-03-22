@@ -1,6 +1,6 @@
 {
   "name": "@cellajs/permission-manager",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cellajs/permission-manager.git"
@@ -8,7 +8,7 @@
   "description": "Permission manager to formulate abac and rbac policies in typescript projects that have a hierarchical structure.",
   "author": "CellaJS <info@cellajs.com>",
   "homepage": "https://cellajs.com",
-  "keywords": ["abac", "rbac","typescript", "permissions", "access control", "authorization"],
+  "keywords": ["abac", "rbac", "typescript", "permissions", "access control", "authorization"],
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
