@@ -1,18 +1,21 @@
 {
   "name": "@cellajs/permission-manager",
-  "version": "0.1.2",
+  "version": "0.0.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cellajs/permission-manager.git"
   },
-  "description": "Permission manager",
+  "description": "Permission manager to formulate abac and rbac policies in typescript projects that have a hierarchical structure.",
   "author": "CellaJS <info@cellajs.com>",
   "homepage": "https://cellajs.com",
-  "keywords": ["abac", "rbac","typescript"],
+  "keywords": ["abac", "rbac","typescript", "permissions", "access control", "authorization"],
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": ["dist", "src"],
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
     "build": "tsup src/index.ts",
     "dev": "tsup --watch --onSuccess \"tsx dist/index.cjs\"",
@@ -24,7 +27,7 @@
     "@evilmartians/lefthook": "^1.6.7",
     "@types/node": "^20.11.30"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
     "tsup": "^8.0.2",
     "typescript": "^5.4.3"
