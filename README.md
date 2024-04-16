@@ -59,7 +59,7 @@ Before configuring the permission manager, it's essential to have a clear unders
 For this purpose, we will sketch a virtual educational app to demonstrate how the configuration will be based on this structure.
 
 <div align="center">
-    <img src="./.github/app-sketch.png" style="max-width: 70%;" />
+    <img src="./.github/app-sketch.png" />
 </div>
 
 In our educational app scenario, we delineate the actors, roles, contexts, and products to establish a comprehensive hierarchical structure. 
