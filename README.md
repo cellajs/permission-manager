@@ -1,6 +1,10 @@
 # permission-manager
 
 <div align="center">
+    
+    <img src="./.github/banner.png" />
+    
+<br />
 
 [cellajs.com](https://cellajs.com) &centerdot; prerelease version &centerdot; MIT license
 
@@ -14,7 +18,7 @@
 - [Description](#Description)
 - [Installation](#Installation)
 - [Workflow](#Workflow)
-- [Configuration](#Permission Manager Configuration)
+- [Configuration](#Configuration)
 - [Contributors](#Contributors)
 - [License](#License)
 
@@ -34,7 +38,7 @@ The permission-manager is a tool designed to facilitate Role-Based Access Contro
 3. Optionally configure your Adapters.
 4. Integrate the permission manager into Middlewares or application logic.
 
-## Permission Manager Configuration
+## Configuration
 
 It's recommended to configure the permission manager during app setup. This can be broken down into three main topics:
 
