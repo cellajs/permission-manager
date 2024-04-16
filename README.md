@@ -90,7 +90,7 @@ By outlining these distinctions, we create a blueprint that guides the configura
 ## Configuration
 It's recommended to configure the permission manager during app setup.
 
-<details>
+<details open>
   <summary>
   
   ![Node.js](https://img.shields.io/badge/Node.js-%2343853D?logo=node.js&logoColor=white)
