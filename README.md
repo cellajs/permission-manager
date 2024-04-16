@@ -16,9 +16,9 @@
 - [Description](#Description)
 - [Installation](#Installation)
 - [Workflow](#Workflow)
-- [Sketch Hierarchical Structure](#Sketch Hierarchical Structure)
-- [Configuration - ](#Configuration Hierarchical structure)
-- [Configuration](#Configuration Access policies)
+- [Sketch: Hierarchical Structure](#Sketch Hierarchical Structure)
+- [Configuration: Hierarchical Structure](#Configuration)
+- [Configuration: Access Policies](#AccessPolicies)
 - [License](#License)
 
 ## Description
@@ -39,7 +39,7 @@ npm install --save @cellajs/permission-manager
 
     Define the hierarchical structure of your application, distinguishing between actors, contexts, roles, and products to establish a clear understanding of the system's architecture.
 
-2. **Configure Hierarchical structure** 
+2. **Import and Configure Permission Manager** 
     
     Import and configure the permission manager with the hierarchical structure of your application to begin managing access control.
 
@@ -55,7 +55,7 @@ npm install --save @cellajs/permission-manager
     
     Integrate the permission manager into middleware layers or directly into application logic to enforce access control throughout the application's execution flow.
 
-## Sketch Hierarchical Structure
+## Sketch
 Before configuring the permission manager, it's essential to have a clear understanding of how it integrates into the various components of your application. 
 For this purpose, we will sketch a virtual educational app to demonstrate how the configuration will be based on this structure.
 
@@ -88,7 +88,7 @@ The key components of this structure include:
 
 By outlining these distinctions, we create a blueprint that guides the configuration of the permission manager, ensuring precise control over access and functionality throughout the application.
 
-## Configuration Hierarchical structure
+## Configuration
 During the setup of your application, it's recommended to import and configure the permission manager to establish access control mechanisms. 
 This ensures that access to different parts of your application is properly regulated based on predefined roles and permissions.
 
@@ -114,7 +114,7 @@ These modules allow you to define the organizational structure, roles, and permi
   new Product('survey', new Set([group]));
 ```
 
-## Configuration Access policies
+## AccessPolicies
 To configure access policies within the `permission-manager`, follow these steps:
 
 1. **Create a New Instance**: 
