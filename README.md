@@ -16,9 +16,10 @@
 - [Description](#Description)
 - [Installation](#Installation)
 - [Workflow](#Workflow)
-- [Sketch: Hierarchical Structure](#Sketch Hierarchical Structure)
+- [Sketch: Hierarchical Structure](#Sketch)
 - [Configuration: Hierarchical Structure](#Configuration)
 - [Configuration: Access Policies](#AccessPolicies)
+- [Configuration: Adapters (optional)](#Adapters)
 - [License](#License)
 
 ## Description
@@ -166,14 +167,14 @@ permissionManager.accessPolicies.configureAccessPolicies(({ subject, contexts }:
     case 'exam':
     case 'reflection':
       // Define access policies for paper, exam and reflection products
-      organization.admin({ create: 1, read: 1, update: 1, delete: 1 });
+      organization.admin({ create: 0, read: 1, update: 1, delete: 1 });
       course.staff({ create: 0, read: 1, update: 1, delete: 1 });
       course.student({ create: 1, read: 0, update: 0, delete: 0 });
       break;
 
     case 'survey':
-      // Define access policies for paper, exam and reflection products
-      organization.admin({ create: 1, read: 1, update: 1, delete: 1 });
+      // Define access policies for survey product
+      organization.admin({ create: 0, read: 1, update: 1, delete: 1 });
       course.staff({ create: 0, read: 1, update: 1, delete: 1 });
       group.member({ create: 1, read: 0, update: 0, delete: 0 });
       break;
@@ -183,11 +184,10 @@ permissionManager.accessPolicies.configureAccessPolicies(({ subject, contexts }:
 ```
 
 
-### 3. Optional: Configure Adapters
+## Adapters
 The permission manager expects a specific format for memberships and subjects to check allowances. 
 To facilitate this conversion process, you can configure adapters that automatically transform your memberships and subjects into the required format.
 
-### Example Usage
 ```typescript
 import { Membership, MembershipAdapter, Subject, SubjectAdapter } from './src/PermissionManager';
 
