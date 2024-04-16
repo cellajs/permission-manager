@@ -1,9 +1,7 @@
 # permission-manager
 
 <div align="center">
-    
     <img src="./.github/banner.png" />
-    
 <br />
 
 [cellajs.com](https://cellajs.com) &centerdot; prerelease version &centerdot; MIT license
