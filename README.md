@@ -88,33 +88,19 @@ The key components of this structure include:
 By outlining these distinctions, we create a blueprint that guides the configuration of the permission manager, ensuring precise control over access and functionality throughout the application.
 
 ## Configuration
-It's recommended to configure the permission manager during app setup.
+During the setup of your application, it's recommended to import and configure the permission manager to establish access control mechanisms. 
+This ensures that access to different parts of your application is properly regulated based on predefined roles and permissions.
 
-<details open>
-  <summary>Node.js</summary>
-  
-  ```js
-  const { Context, Product } = require('@cellajs/permission-manager');
-  
-  // Define contexts
-  const organization = new Context('organization', ['admin', 'staff', 'student']);
-  const course = new Context('course', ['staff', 'student'], new Set([organization]));
-  const group = new Context('group', ['member'], new Set([course]));
-  
-  // Define products
-  new Product('paper', new Set([course]));
-  new Product('exam', new Set([course]));
-  new Product('reflection', new Set([course]));
-  new Product('survey', new Set([group]));
-  ```
-</details
+The first step in configuring the permission manager is to communicate the defined hierarchical structure of your application, as outlined in the sketch, to the permission manager module. 
+This involves defining the contexts and products that represent the various components and entities within your application.
 
-<details>
-  <summary>TypeScript</summary>
+For this initial configuration, you only need to utilize the Context and Product modules provided by the permission manager. 
+These modules allow you to define the organizational structure, roles, and permissions within your application, setting the foundation for precise access control.
   
-  ```typescript
+```js
+  // Import or Require
   import { Context, Product } from '@cellajs/permission-manager';
-  
+
   // Define contexts
   const organization = new Context('organization', ['admin', 'staff', 'student']);
   const course = new Context('course', ['staff', 'student'], new Set([organization]));
@@ -125,9 +111,7 @@ It's recommended to configure the permission manager during app setup.
   new Product('exam', new Set([course]));
   new Product('reflection', new Set([course]));
   new Product('survey', new Set([group]));
-  ```
-</details>
-
+```
 
 ### 2. Build Access Policies
 
