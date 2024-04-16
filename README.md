@@ -88,38 +88,54 @@ The key components of this structure include:
 By outlining these distinctions, we create a blueprint that guides the configuration of the permission manager, ensuring precise control over access and functionality throughout the application.
 
 ## Configuration
+It's recommended to configure the permission manager during app setup.
 
-It's recommended to configure the permission manager during app setup. This can be broken down into three main topics:
+<details>
+  <summary>
+  
+  ![Node.js](https://img.shields.io/badge/Node.js-%2343853D?logo=node.js&logoColor=white)
+  
+  </summary>
+  
+  ```js
+  const { Context, Product } = require('@cellajs/permission-manager');
+  
+  // Define contexts
+  const organization = new Context('organization', ['admin', 'staff', 'student']);
+  const course = new Context('course', ['staff', 'student'], new Set([organization]));
+  const group = new Context('group', ['member'], new Set([course]));
+  
+  // Define products
+  new Product('paper', new Set([course]));
+  new Product('exam', new Set([course]));
+  new Product('reflection', new Set([course]));
+  new Product('survey', new Set([group]));
+  ```
+</details
 
-### 1. Define App Structure
+<details>
+  <summary>
+  
+  ![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC?logo=typescript&logoColor=white)
+  
+  </summary>
+  
+  ```typescript
+  import { Context, Product } from '@cellajs/permission-manager';
+  
+  // Define contexts
+  const organization = new Context('organization', ['admin', 'staff', 'student']);
+  const course = new Context('course', ['staff', 'student'], new Set([organization]));
+  const group = new Context('group', ['member'], new Set([course]));
+  
+  // Define products
+  new Product('paper', new Set([course]));
+  new Product('exam', new Set([course]));
+  new Product('reflection', new Set([course]));
+  new Product('survey', new Set([group]));
+  ```
+</details
 
-We differentiate between a context and a product:
-
-- A context contains roles that an actor can claim.
-- A product doesn't have roles and represents entities that can be created by actors.
-
-### Example Usage
-<img src="./.github/structure.png" />
-
-```typescript
-import { Context, Product } from './src/PermissionManager';
-
-const community = new Context(
-    'community',  // Name of context
-    ['admin', 'member'], // Array of role names
-);
-
-const group = new Context(
-    'group', // Name of context
-    ['leader', 'member'],// Array of role names
-    new Set([community]), // A set of parents
-);
-
-const item = new Product(
-    'item', // Name of product
-    new Set([group]), // A set of parents
-);
-```
 
 ### 2. Build Access Policies
 
