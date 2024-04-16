@@ -58,7 +58,11 @@ npm install --save @cellajs/permission-manager
 Before configuring the permission manager, it's essential to have a clear understanding of how it integrates into the various components of your application. 
 For this purpose, we will sketch a virtual educational app to demonstrate how the configuration will be based on this structure.
 
-In our educational app scenario, we will delineate the roles, contexts, and products to establish a comprehensive hierarchical structure. 
+<div align="center">
+    <img src="./.github/app-sketch.png" style="max-width: 70%;" />
+</div>
+
+In our educational app scenario, we delineate the actors, roles, contexts, and products to establish a comprehensive hierarchical structure. 
 The key components of this structure include:
 
 1. **Actors** 
@@ -81,12 +85,7 @@ The key components of this structure include:
     The tangible elements within the application, such as papers, exams or surveys. 
     Unlike contexts, products do not have roles to claim; they are entities that are accessed and manipulated by actors based on their assigned roles and permissions within the respective contexts.
 
-By outlining these distinctions, we can create a blueprint that guides the configuration of the permission manager, ensuring precise control over access and functionality throughout the application.
-
-<div align="center">
-    <img src="./.github/app-sketch.png" style="max-width: 70%;" />
-</div>
-
+By outlining these distinctions, we create a blueprint that guides the configuration of the permission manager, ensuring precise control over access and functionality throughout the application.
 
 ## Configuration
 
