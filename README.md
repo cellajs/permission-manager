@@ -15,7 +15,6 @@
 - [Installation](#Installation)
 - [Workflow](#Workflow)
 - [Configuration](#Configuration)
-- [Contributors](#Contributors)
 - [License](#License)
 
 ## Description
@@ -25,9 +24,16 @@ This first release is primarily integrated with [cella.js](https://cellajs.com/a
 
 
 ## Installation
-1. Step 1
-2. Step 2
-3. Step 3
+
+### Prerequisites
+- ![Node.js >= 12.0.0](https://img.shields.io/badge/Node.js-%2343853D?logo=node.js&logoColor=white)
+- ![TypeScript >= 4.0.0](https://img.shields.io/badge/TypeScript-%23007ACC?logo=typescript&logoColor=white)
+
+### Installation Steps
+Install the module via npm:
+```bash
+npm install --save @cellajs/permission-manager
+```
 
 ## Workflow
 
