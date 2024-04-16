@@ -1,5 +1,3 @@
-# permission-manager
-
 <div align="center">
     <img src="./.github/banner.png" />
 <br />
