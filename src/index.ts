@@ -63,6 +63,7 @@ export interface AccessPolicyConfiguration {
   subject: HierarchicalEntity;
   contexts: {
     [contextName: string]: {
+      // biome-ignore lint/complexity/noBannedTypes: The callback function provided by the user configures AccessPolicy.
       [roleName: string]: Function;
     };
   };
@@ -115,6 +116,7 @@ export abstract class MembershipAdapter {
    * @abstract
    */
 
+  // biome-ignore lint/suspicious/noExplicitAny: The type of 'memberships' can vary based on the developer's application requirements.
   abstract adapt(memberships: any[]): Membership[];
 }
 
@@ -139,6 +141,8 @@ export abstract class SubjectAdapter {
    * @returns {Subject} The adapted subject.
    * @abstract
    */
+
+  // biome-ignore lint/suspicious/noExplicitAny: The type of 'subject' can vary based on the developer's application requirements.
   abstract adapt(subject: any): Subject;
 }
 
@@ -256,16 +260,16 @@ export function getHierarchy(relationships: Relationships): Hierachy {
     const polyhierarchicalAncestors = relationship.polyhierarchicalAncestors || [relationship.ancestors];
     const inheritanceName = relationship.inheritsFrom;
 
-    polyhierarchicalAncestors.forEach((ancestorNames) => {
+    for (const ancestorNames of polyhierarchicalAncestors) {
       let currentLevel: Hierachy = hierachy;
 
-      ancestorNames?.reverse().forEach((ancestorName) => {
+      for (const ancestorName of ancestorNames?.reverse() || []) {
         currentLevel[ancestorName] = currentLevel[ancestorName] || {};
         currentLevel = currentLevel[ancestorName];
-      });
+      }
 
       currentLevel[inheritanceName] = {};
-    });
+    }
   }
 
   return hierachy;
@@ -439,7 +443,9 @@ export class HierarchicalEntity {
     for (const parent of this.parents) {
       parent.addChild(this);
       const owners = parent.addController(this);
-      owners.forEach((owner) => this.owners.add(owner));
+      for (const owner of owners) {
+        this.owners.add(owner);
+      }
     }
   }
 
@@ -477,10 +483,12 @@ export class HierarchicalEntity {
       this.controllers.add(controller);
       owners.add(this);
     } else {
-      this.parents.forEach((parent) => {
+      for (const parent of this.parents) {
         const parentOwners = parent.addController(controller);
-        parentOwners.forEach((owner) => owners.add(owner));
-      });
+        for (const owner of parentOwners) {
+          owners.add(owner);
+        }
+      }
     }
 
     return owners;
@@ -493,12 +501,14 @@ export class HierarchicalEntity {
   buildAncestorsRelations(): void {
     for (const parent of this.parents) {
       this.ancestors.add(parent);
-      parent.ancestors.forEach((ancestor) => this.ancestors.add(ancestor));
+      for (const ancestor of parent.ancestors) {
+        this.ancestors.add(ancestor);
+      }
     }
 
-    this.ancestors.forEach((ancestor) => {
+    for (const ancestor of this.ancestors) {
       if (this.isRequiredAncestor(ancestor)) this.requiredAncestors.add(ancestor);
-    });
+    }
   }
 
   /**
@@ -542,7 +552,9 @@ export class Context extends HierarchicalEntity {
    */
   constructor(name: string, roles: Array<string>, parents: Set<HierarchicalEntity> = new Set()) {
     super(name, parents);
-    roles.forEach((roleName) => this.roles.add(new Role(roleName, this)));
+    for (const roleName of roles) {
+      this.roles.add(new Role(roleName, this));
+    }
   }
 }
 
@@ -742,14 +754,14 @@ export class AccessPolicies {
 
             // Create action policies and add allowance
             const actionPolicies: ActionPolicies = {};
-            this.actions.forEach((action: string) => {
+            for (const action of this.actions) {
               actionPolicies[action] = !!definedActionPolicies[action];
 
               // If action allowed, add allowance
               if (actionPolicies[action]) {
                 this.addAllowance(context, contextRole, subject, subjectRole, action);
               }
-            });
+            }
 
             // Add to accessPolicies
             this.accessPolicies.add({
@@ -773,6 +785,8 @@ export class AccessPolicies {
    * @param {Role|null} subjectRole - The subject role
    * @returns {ActionPolicies | {}} Defined action policy or empty object if not found.
    */
+
+  // biome-ignore lint/complexity/noBannedTypes: Returns empty object when no defined action policies are found.
   getDefinedActionPolicies(context: Context, contextRole: Role, subject: HierarchicalEntity, subjectRole: Role | null): ActionPolicies | {} {
     // Retrieve context access policy
     const contextAccessPolicy = this.definedAccessPolicies.get(context.name);
@@ -822,22 +836,24 @@ export class AccessPolicies {
    * @param {Function} fnc - The function to configure access policies.
    * @returns {void}
    */
+
+  // biome-ignore lint/complexity/noBannedTypes: The callback function provided by the user configures AccessPolicy.
   configureAccessPolicies(fnc: Function): void {
-    HierarchicalEntity.instances.forEach((subject) => {
+    for (const subject of HierarchicalEntity.instances) {
       const accessPolicyObj: AccessPolicyConfiguration = { subject, contexts: {} };
 
-      Context.instances.forEach((context) => {
+      for (const context of Context.instances) {
         if (context instanceof Context) {
           accessPolicyObj.contexts[context.name] = {};
 
-          context.roles.forEach((role) => {
+          for (const role of context.roles) {
             this.createAccessPolicyFunction(accessPolicyObj, context, role, subject);
-          });
+          }
         }
-      });
+      }
 
       fnc(accessPolicyObj);
-    });
+    }
 
     this.buildAccessPolicies();
   }
@@ -866,7 +882,9 @@ export class AccessPolicies {
    * @returns {void}
    */
   addActionToSet(policy: ActionPolicies): void {
-    Object.keys(policy).forEach((action) => this.actions.add(action));
+    for (const action of Object.keys(policy)) {
+      this.actions.add(action);
+    }
   }
 
   /**
@@ -911,16 +929,16 @@ export class AccessPolicies {
    * @returns {void}
    */
   setAncestorAccessPoliciesForRole(role: Role, subject: HierarchicalEntity, policy: ActionPolicies): void {
-    subject.ancestors.forEach((ancestor) => {
+    for (const ancestor of subject.ancestors) {
       if (ancestor instanceof Context) {
-        ancestor.roles?.forEach((ancestorRole) => {
+        for (const ancestorRole of ancestor.roles || []) {
           const ancestorRoleAccessPolicy = this.getAndEnsureSubjectRoleAccessPolicy(ancestor, ancestorRole, subject);
           if (!ancestorRoleAccessPolicy.has(role.name)) {
             ancestorRoleAccessPolicy.set(role.name, policy);
           }
-        });
+        }
       }
-    });
+    }
   }
 
   /**
@@ -932,11 +950,11 @@ export class AccessPolicies {
    */
   setSubjectRolePermissions(accessPolicy: SubjectRoleAccessPolicies, subject: HierarchicalEntity, policy: ActionPolicies): void {
     if (subject instanceof Context) {
-      subject.roles.forEach((subjectRole) => {
+      for (const subjectRole of subject.roles) {
         if (!accessPolicy.has(subjectRole.name)) {
           accessPolicy.set(subjectRole.name, policy);
         }
-      });
+      }
     }
   }
 
@@ -1103,17 +1121,17 @@ export class PermissionsTree {
    * @returns {void}
    */
   buildControllers(entities: Set<HierarchicalEntity>): void {
-    entities.forEach((entity) => {
+    for (const entity of entities) {
       // Initialize a Set for controller name references if not already present
       if (!this.controllers.has(entity.name)) {
         this.controllers.set(entity.name, new Set());
       }
 
       // Add controller name references for each controller entity
-      entity.controllers.forEach((controller) => {
+      for (const controller of entity.controllers) {
         this.controllers.get(entity.name)?.add(controller.name);
-      });
-    });
+      }
+    }
   }
 }
 
@@ -1218,7 +1236,7 @@ export class PermissionManager {
 
     // Group memberships by contextName and contextKey
     const groupedMemberships = new Map<string, Map<string, Membership>>();
-    memberships.forEach((membership) => {
+    for (const membership of memberships) {
       if (!groupedMemberships.has(membership.contextName)) {
         groupedMemberships.set(membership.contextName, new Map<string, Membership>());
       }
@@ -1228,7 +1246,7 @@ export class PermissionManager {
       if (membership.contextName === subject.name && membership.contextKey === subject.key) {
         subjectMembership = membership;
       }
-    });
+    }
 
     // Get the subject entity
     const subjectEntity = HierarchicalEntity.instanceMap.get(subject.name);
@@ -1243,7 +1261,7 @@ export class PermissionManager {
     let ancestors: { [entityName: string]: string | null | undefined } = {};
 
     // Iterate through the subject's sorted ancestors
-    subjectEntity?.descSortedAncestors.forEach((ancestor) => {
+    for (const ancestor of subjectEntity?.descSortedAncestors || []) {
       const ancestorKey = subject.ancestors[ancestor.name] || ancestors[ancestor.name];
 
       if (ancestorKey) {
@@ -1254,7 +1272,7 @@ export class PermissionManager {
           ancestors = { ...ancestors, ...membership.ancestors };
         }
       }
-    });
+    }
 
     // Generate access policy keys based on context memberships
     const accessPolicyKeys = new Set(
@@ -1287,7 +1305,7 @@ export class PermissionManager {
 
     // Group memberships by contextName and contextKey
     const groupedMemberships = new Map<string, Map<string, Membership>>();
-    memberships.forEach((membership) => {
+    for (const membership of memberships) {
       if (!groupedMemberships.has(membership.contextName)) {
         groupedMemberships.set(membership.contextName, new Map<string, Membership>());
       }
@@ -1297,7 +1315,7 @@ export class PermissionManager {
       if (membership.contextName === subject.name && membership.contextKey === subject.key) {
         subjectMembership = membership;
       }
-    });
+    }
 
     // Get the subject entity
     const subjectEntity = HierarchicalEntity.instanceMap.get(subject.name);
@@ -1313,7 +1331,7 @@ export class PermissionManager {
     const ancestorMemberships = new Set<Membership>();
 
     // Iterate through the subject's sorted ancestors
-    subjectEntity?.descSortedAncestors.forEach((ancestor) => {
+    for (const ancestor of subjectEntity?.descSortedAncestors || []) {
       const ancestorKey = subject.ancestors[ancestor.name] || ancestors[ancestor.name];
 
       if (ancestorKey) {
@@ -1326,19 +1344,19 @@ export class PermissionManager {
           ancestors = { ...ancestors, ...membership.ancestors };
         }
       }
-    });
+    }
 
     // Generate controller access policy keys based on subject and ancestor memberships
     const controllerAccessPolicyKeys = new Set<string>();
-    subjectEntity?.controllers.forEach((controller) => {
+    for (const controller of subjectEntity?.controllers || []) {
       const controllerKey = `${controller.name}-null`;
       if (subjectMembership) {
         controllerAccessPolicyKeys.add(`${subjectMembership.contextName}-${subjectMembership.roleName}-${controllerKey}`);
       }
-      ancestorMemberships.forEach((membership) => {
+      for (const membership of ancestorMemberships) {
         controllerAccessPolicyKeys.add(`${membership.contextName}-${membership.roleName}-${controllerKey}`);
-      });
-    });
+      }
+    }
 
     // Generate access policy keys based on context memberships
     const accessPolicyKeys = new Set(
@@ -1360,6 +1378,8 @@ export class PermissionManager {
    * @param {any} subject - The subject object for which permission is being checked. The structure of the subject object may vary depending on the provided adapter.
    * @returns {boolean} Returns true if the action is allowed, false if not allowed.
    */
+
+  // biome-ignore lint/suspicious/noExplicitAny: The types of 'memberships' and 'subject' are dynamically converted by a possible adapter.
   isPermissionAllowed(memberships: any[], action: string, subject: any): boolean {
     // Adapt the subject if a subject adapter is provided
     const adaptedSubject: Subject = PermissionManager.subjectAdapter ? PermissionManager.subjectAdapter.adapt(subject) : subject;
@@ -1414,6 +1434,8 @@ export class PermissionManager {
    * @param {any} subject - The subject object for which permission is being checked. The structure of the subject object may vary depending on the provided adapter.
    * @returns {ActionPolicies} The action policies for the actor.
    */
+
+  // biome-ignore lint/suspicious/noExplicitAny: The types of 'memberships' and 'subject' are dynamically converted by a possible adapter.
   getActorPolicies(memberships: any[], subject: any): ActionPolicies {
     // Adapt the subject if a subject adapter is provided, otherwise use it directly
     const adaptedSubject: Subject = PermissionManager.subjectAdapter ? PermissionManager.subjectAdapter.adapt(subject) : subject;
@@ -1444,17 +1466,17 @@ export class PermissionManager {
     const actorPolicies: ActionPolicies = {};
 
     // Check each action against the access policies
-    this.accessPolicies.actions.forEach((action) => {
+    for (const action of this.accessPolicies.actions) {
       const actionPolicyKey = `${subject.name}-${action}`;
       const allowance = this.accessPolicies.allowance.get(actionPolicyKey);
 
       // Determine if the action is allowed for the subject
       actorPolicies[action] = !!(allowance && doSetsHaveCommonElement(accessPolicyKeys, allowance));
-    });
+    }
 
     // Check each controller action against the access policies
-    subjectEntity?.controllers.forEach((controller) => {
-      this.accessPolicies.actions.forEach((action) => {
+    for (const controller of subjectEntity?.controllers || []) {
+      for (const action of this.accessPolicies.actions) {
         const actionPolicyKey = `${controller.name}-${action}`;
         const allowance = this.accessPolicies.allowance.get(actionPolicyKey);
 
@@ -1462,8 +1484,8 @@ export class PermissionManager {
         if (allowance && doSetsHaveCommonElement(controllerAccessPolicyKeys, allowance)) {
           actorPolicies[`${controller.name}.${action}`] = true;
         }
-      });
-    });
+      }
+    }
 
     return actorPolicies;
   }
