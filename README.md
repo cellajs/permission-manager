@@ -16,6 +16,7 @@
 - [Description](#Description)
 - [Installation](#Installation)
 - [Workflow](#Workflow)
+- [Sketch Hierarchical Structure](#Sketch)
 - [Configuration](#Configuration)
 - [License](#License)
 
@@ -35,7 +36,7 @@ npm install --save @cellajs/permission-manager
 
 1. **Sketch Hierarchical Structure**
 
-   Define the hierarchical structure of your application, distinguishing between actors, contexts, roles, and products to establish a clear understanding of the system's architecture.
+    Define the hierarchical structure of your application, distinguishing between actors, contexts, roles, and products to establish a clear understanding of the system's architecture.
 
 2. **Import and Configure Permission Manager** 
     
@@ -52,6 +53,37 @@ npm install --save @cellajs/permission-manager
 5. **Integrate with Middlewares or Application Logic**
     
     Integrate the permission manager into middleware layers or directly into application logic to enforce access control throughout the application's execution flow.
+
+## Sketch
+Before configuring the permission manager, it's essential to have a clear understanding of how it integrates into the various components of your application. 
+For this purpose, we will sketch a virtual educational app to demonstrate how the configuration will be based on this structure.
+
+In our educational app scenario, we will delineate the roles, contexts, and products to establish a comprehensive hierarchical structure. 
+The key components of this structure include:
+
+1. **Actors** 
+
+    Essentially user entities within the system who interact with the application, such as students, teachers, or administrators.
+
+2. **Contexts** 
+
+    Recognizable environments within the application that maintain roles which can be claimed by actors.
+    Examples of contexts might include organizations, courses or groups.
+
+3. **Roles** 
+
+    These represent distinct role names available within a context. 
+    Roles define the permissions granted to actors within specific contexts. 
+    For instance, a "student" role might have permissions to view course materials, while a "teacher" role could have permissions to create assignments.
+
+4. **Products** 
+
+    The tangible elements within the application, such as papers, exams or surveys. 
+    Unlike contexts, products do not have roles to claim; they are entities that are accessed and manipulated by actors based on their assigned roles and permissions within the respective contexts.
+
+By outlining these distinctions, we can create a blueprint that guides the configuration of the permission manager, ensuring precise control over access and functionality throughout the application.
+
+<img src="./.github/app-sketch.png" />
 
 ## Configuration
 
