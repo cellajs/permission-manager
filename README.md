@@ -4,6 +4,8 @@
 
 [cellajs.com](https://cellajs.com) &centerdot; prerelease version &centerdot; MIT license
 
+![Node.js](https://img.shields.io/badge/Node.js-%2343853D?logo=node.js&logoColor=white) &middot; ![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC?logo=typescript&logoColor=white)
+
 </div>
 
 #### Prerelease
@@ -24,11 +26,6 @@ This first release is primarily integrated with [cella.js](https://cellajs.com/a
 
 
 ## Installation
-
-### Prerequisites
-![Node.js](https://img.shields.io/badge/Node.js-%2343853D?logo=node.js&logoColor=white) or ![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC?logo=typescript&logoColor=white)
-
-### Installation Steps
 Install the module via npm:
 ```bash
 npm install --save @cellajs/permission-manager
