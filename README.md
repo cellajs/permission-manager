@@ -91,7 +91,7 @@ By outlining these distinctions, we create a blueprint that guides the configura
 It's recommended to configure the permission manager during app setup.
 
 <details open>
-  <summary>![Node.js](https://img.shields.io/badge/Node.js-%2343853D?logo=node.js&logoColor=white)</summary>
+  <summary>Node.js</summary>
   
   ```js
   const { Context, Product } = require('@cellajs/permission-manager');
@@ -110,7 +110,7 @@ It's recommended to configure the permission manager during app setup.
 </details
 
 <details>
-  <summary>![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC?logo=typescript&logoColor=white)</summary>
+  <summary>TypeScript</summary>
   
   ```typescript
   import { Context, Product } from '@cellajs/permission-manager';
