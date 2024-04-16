@@ -20,6 +20,7 @@
 - [Configuration: Hierarchical Structure](#Configuration)
 - [Configuration: Access Policies](#AccessPolicies)
 - [Configuration: Adapters (optional)](#Adapters)
+- [Usage](#Usage)
 - [License](#License)
 
 ## Description
@@ -221,19 +222,16 @@ class AppSubjectAdapter extends SubjectAdapter {
 const appSubjectAdapter = new AppSubjectAdapter();
 ```
 
-## Permission Manager Usage
+## Usage
 There are currently two ways to use permission-manager within app logic:
 
 1. **isPermissionAllowed:** Checks if a permission is allowed. It returns a simple boolean. Additionally, it checks the ancestor roles of a subject.
-
-### Example Usage
 
 ```typescript
 const isAllowed = permissionManager.isPermissionAllowed(memberships, 'read', subject);
 ```
 2. **getActorPolicies:** Returns an object with all action allowances and action allowances of child subjects. This object can be used to extend a subject with, for example, a 'canDo' property. This can be utilized on the client-side, so clients don't need to know which role an actor has to determine their permissions
 
-### Example Usage
 ```typescript
 const canDo = permissionManager.getActorPolicies(memberships, subject);
 ```
