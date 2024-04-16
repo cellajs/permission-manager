@@ -83,7 +83,10 @@ The key components of this structure include:
 
 By outlining these distinctions, we can create a blueprint that guides the configuration of the permission manager, ensuring precise control over access and functionality throughout the application.
 
-<img src="./.github/app-sketch.png" />
+<div align="center">
+    <img src="./.github/app-sketch.png" style="max-width: 70%;" />
+</div>
+
 
 ## Configuration
 
