@@ -34,18 +34,23 @@ npm install --save @cellajs/permission-manager
 ## Workflow
 
 1. **Sketch Hierarchical Structure**
+
    Define the hierarchical structure of your application, distinguishing between actors, contexts, roles, and products to establish a clear understanding of the system's architecture.
 
 2. **Import and Configure Permission Manager** 
+    
     Import and configure the permission manager into your application to begin managing access control.
 
 3. **Configure Access Policies**
+    
     Establish access policies based on a many-to-many relationship between different contexts and their corresponding roles, ensuring precise control over permissions.
 
 4. **Optional Adapter Configuration**
+    
     Optionally configure adapters to seamlessly integrate the permission manager with other systems or frameworks within your application ecosystem.
 
 5. **Integrate with Middlewares or Application Logic**
+    
     Integrate the permission manager into middleware layers or directly into application logic to enforce access control throughout the application's execution flow.
 
 ## Configuration
