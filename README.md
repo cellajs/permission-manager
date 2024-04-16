@@ -173,9 +173,6 @@ const isAllowed = permissionManager.isPermissionAllowed(memberships, 'read', sub
 const canDo = permissionManager.getActorPolicies(memberships, subject);
 ```
 
-## Contributors
-(Add contributors if applicable)
-
 ## License
 MIT License
 
