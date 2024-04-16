@@ -16,8 +16,9 @@
 - [Description](#Description)
 - [Installation](#Installation)
 - [Workflow](#Workflow)
-- [Sketch Hierarchical Structure](#Sketch)
-- [Configuration](#Configuration)
+- [Sketch Hierarchical Structure](#Sketch Hierarchical Structure)
+- [Configuration - ](#Configuration Hierarchical structure)
+- [Configuration](#Configuration Access policies)
 - [License](#License)
 
 ## Description
@@ -38,9 +39,9 @@ npm install --save @cellajs/permission-manager
 
     Define the hierarchical structure of your application, distinguishing between actors, contexts, roles, and products to establish a clear understanding of the system's architecture.
 
-2. **Import and Configure Permission Manager** 
+2. **Configure Hierarchical structure** 
     
-    Import and configure the permission manager into your application to begin managing access control.
+    Import and configure the permission manager with the hierarchical structure of your application to begin managing access control.
 
 3. **Configure Access Policies**
     
@@ -54,7 +55,7 @@ npm install --save @cellajs/permission-manager
     
     Integrate the permission manager into middleware layers or directly into application logic to enforce access control throughout the application's execution flow.
 
-## Sketch
+## Sketch Hierarchical Structure
 Before configuring the permission manager, it's essential to have a clear understanding of how it integrates into the various components of your application. 
 For this purpose, we will sketch a virtual educational app to demonstrate how the configuration will be based on this structure.
 
@@ -87,7 +88,7 @@ The key components of this structure include:
 
 By outlining these distinctions, we create a blueprint that guides the configuration of the permission manager, ensuring precise control over access and functionality throughout the application.
 
-## Configuration
+## Configuration Hierarchical structure
 During the setup of your application, it's recommended to import and configure the permission manager to establish access control mechanisms. 
 This ensures that access to different parts of your application is properly regulated based on predefined roles and permissions.
 
@@ -113,17 +114,20 @@ These modules allow you to define the organizational structure, roles, and permi
   new Product('survey', new Set([group]));
 ```
 
-### 2. Build Access Policies
-
+## Configuration Access policies
 To configure access policies within the `permission-manager`, follow these steps:
 
-1. **Create a New Instance**: Instantiate a new `PermissionManager` instance.
+1. **Create a New Instance**: 
 
-2. **Configure Access Policies**: Utilize the `configureAccessPolicies` method to set up access policies. This function will be injected with an object containing the subject and the contexts.
+    Instantiate a new `PermissionManager` instance.
 
-### Example Usage
+2. **Configure Access Policies**: 
+
+    Utilize the `configureAccessPolicies` method to set up access policies. 
+    This function will be injected with an object containing the subject and the contexts.
+
 ```typescript
-import { PermissionManager, AccessPolicyConfiguration } from './src/PermissionManager';
+const { PermissionManager, AccessPolicyConfiguration } = require('@cellajs/permission-manager');
 
 // Create a new instance of PermissionManager
 const permissionManager = new PermissionManager('guard');
@@ -131,31 +135,49 @@ const permissionManager = new PermissionManager('guard');
 // Configure access policies using the configureAccessPolicies method
 permissionManager.accessPolicies.configureAccessPolicies(({ subject, contexts }: AccessPolicyConfiguration) => {
 
-    // Destructure the contexts object
-    const { community, group } = contexts;
+  // Destructure the contexts object
+  const { organization, course, group } = contexts;
 
-    // Switch statement to define access policies based on the subject
-    switch (subject.name) {
-        case 'community':
-            // Define access policies for community context
-            community.admin({ create: 0, read: 1, update: 1, delete: 0, invite: 1 });
-            community.member({ create: 0, read: 1, update: 0, delete: 0, invite: 1 });
-            break;
+  // Switch statement to define access policies based on the subject
+  switch (subject.name) {
+    case 'organization':
+      // Define access policies for organization context
+      organization.admin({ create: 0, read: 1, update: 1, delete: 0, invite: 1 });
+      organization.staff({ create: 0, read: 1, update: 0, delete: 0, invite: 1 });
+      organization.student({ create: 0, read: 1, update: 0, delete: 0, invite: 1 });
+      break;
 
-        case 'group':
-            // Define access policies for group context
-            community.admin({ create: 1, read: 1, update: 1, delete: 1, invite: 1 });
-            group.leader({ create: 0, read: 1, update: 1, delete: 0, invite: 1 });
-            group.member({ create: 0, read: 1, update: 0, delete: 0, invite: 1 });
-            break;
+    case 'course':
+      // Define access policies for course context
+      organization.admin({ create: 1, read: 1, update: 1, delete: 1, invite: 1 });
+      organization.staff({ create: 1, read: 1, update: 0, delete: 0, invite: 0 });
+      course.staff({ create: 1, read: 1, update: 1, delete: 1, invite: 1 });
+      course.student({ create: 0, read: 1, update: 0, delete: 0, invite: 0 });
+      break;
 
-        case 'item':
-            // Define access policies for item context
-            community.admin({ create: 1, read: 1, update: 1, delete: 1 });
-            group.leader({ create: 1, read: 1, update: 1, delete: 1 });
-            group.member({ create: 1, read: 1, update: 0, delete: 0 });
-            break;
-    }
+    case 'group':
+      // Define access policies for group context
+      organization.admin({ create: 1, read: 1, update: 1, delete: 1, invite: 1 });
+      course.staff({ create: 1, read: 1, update: 1, delete: 1, invite: 1 });
+      group.member({ create: 0, read: 1, update: 0, delete: 0, invite: 0 });
+      break;
+
+    case 'paper':
+    case 'exam':
+    case 'reflection':
+      // Define access policies for paper, exam and reflection products
+      organization.admin({ create: 1, read: 1, update: 1, delete: 1 });
+      course.staff({ create: 0, read: 1, update: 1, delete: 1 });
+      course.student({ create: 1, read: 0, update: 0, delete: 0 });
+      break;
+
+    case 'survey':
+      // Define access policies for paper, exam and reflection products
+      organization.admin({ create: 1, read: 1, update: 1, delete: 1 });
+      course.staff({ create: 0, read: 1, update: 1, delete: 1 });
+      group.member({ create: 1, read: 0, update: 0, delete: 0 });
+      break;
+  }
 });
 
 ```
