@@ -128,7 +128,7 @@ To configure access policies within the `permission-manager`, follow these steps
     This function will be injected with an object containing the subject and the contexts.
 
 ```typescript
-const { PermissionManager, AccessPolicyConfiguration } = require('@cellajs/permission-manager');
+import { PermissionManager, AccessPolicyConfiguration } from '@cellajs/permission-manager';
 
 // Create a new instance of PermissionManager
 const permissionManager = new PermissionManager('guard');
@@ -189,7 +189,7 @@ The permission manager expects a specific format for memberships and subjects to
 To facilitate this conversion process, you can configure adapters that automatically transform your memberships and subjects into the required format.
 
 ```typescript
-import { Membership, MembershipAdapter, Subject, SubjectAdapter } from './src/PermissionManager';
+import { Membership, MembershipAdapter, Subject, SubjectAdapter } from '@cellajs/permission-manager';
 
 // Custom adapter for transforming memberships to the expected format
 class AppMembershipAdapter extends MembershipAdapter {
