@@ -1,4 +1,4 @@
-# Permission manager APIS
+# Permission manager API's
 
 <div align="center">
 
