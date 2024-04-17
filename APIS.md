@@ -22,6 +22,7 @@ Interfaces:
 - [Membership API](#Membership-API)
 - [Subject API](#Subject-API)
 - [AccessPolicyConfiguration API](#AccessPolicyConfiguration-API)
+- [ActionPolicies API](#ActionPolicies-API)
 
 ## Context API
 > Type: Class
@@ -266,7 +267,13 @@ This `AccessPolicyConfiguration` refers to the current access policy within the 
 | Property | Type | Description|
 |----------|----------|----------|
 | subject | `HierarchicalEntity` | An instance of a `HierarchicalEntity` |
-| contexts | `Object` | An object mapping context names to objects representing configurable roles as `Function`s|
+| contexts | `Object` | An object mapping context names to objects representing configurable roles as `Function`|
+
+#### Attributes.contexts<contextName>.<roleName>
+| Param | Required| Type | Description|
+|----------|----------|----------|----------|
+| policy | Yes | `ActionPolicies` | The access policy object. |
+
 
 #### Example
 ```typescript
@@ -284,5 +291,27 @@ This `AccessPolicyConfiguration` refers to the current access policy within the 
           'sponsor': /*AccessPolicyFunction*/ Function,          
       },
   },
+};
+```
+
+## ActionPolicies API
+> Type: Interface
+
+The `getActorPolicies` method from the Permission Manager returns an object of `ActionPolicies`. 
+During the configuration of access policies using the `configureAccessPolicies` method exposed by the `PermissionManager`, the configurable role functions will expect an `ActionPolicies` object. 
+This object maps actions to allowances in a `Boolean` format.
+
+#### Attributes
+| Property | Type | Description|
+|----------|----------|----------|
+| `<action>` | `Boolean` | An action in `String` format mapped to allowances in a `Boolean` format. |
+
+#### Example
+```typescript
+{
+  create: true,
+  read: true,
+  update: true,
+  delete: false,  
 };
 ```
