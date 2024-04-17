@@ -98,6 +98,12 @@ The permission manager evaluates user permissions based on the established hiera
 |----------|----------|----------|----------|
 | name | Yes | `String` | The (unique) name of the permission manager |
 
+#### Methods
+| Method | Description|
+|----------|----------|
+| isPermissionAllowed | Checks if a permission is allowed based on the provided memberships, action, and subject. |
+| getActorPolicies | Retrieves the action policies for an actor based on the provided memberships and subject. |
+
 #### Usage
 
 ```typescript
@@ -106,6 +112,9 @@ import { PermissionManager } from '@cellajs/permission-manager';
 const permissionManager = new PermissionManager(
     'guard', // name
 );
+
+const isAllowed = permissionManager.isPermissionAllowed(Array<Membership>, action, Subject);
+const canDo = permissionManager.getActorPolicies(Array<Membership>, Subject);
 ```
 
 ## MembershipAdapter API
@@ -114,6 +123,11 @@ const permissionManager = new PermissionManager(
 The permission manager requires a specific format for memberships. 
 To simplify this conversion process, you can configure the MembershipAdapter that automatically transform your memberships into the required format. 
 This adapter is automatically utilized when instantiating an inherited class with an overridden `adapt` method.
+
+#### Abstract methods
+| Method | Description|
+|----------|----------|
+| adapt | Transforms memberships from a custom format to the expected format for Membership. |
 
 #### Usage
 
@@ -140,6 +154,11 @@ new AdaptedMembershipAdapter();
 The permission manager requires a specific format for subjects. 
 To simplify this conversion process, you can configure the SubjectAdapter to automatically transform your subjects into the required format.
 This adapter is automatically utilized when instantiating an inherited class with an overridden `adapt` method.
+
+#### Abstract methods
+| Method | Description|
+|----------|----------|
+| adapt | Transforms subjects from a custom format to the expected format for Subject. |
 
 #### Usage
 
