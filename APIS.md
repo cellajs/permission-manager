@@ -22,7 +22,7 @@ A HierarchicalEntity serves as the superclass of both Context and Product.
 | roles | Yes | `Array<String>` | These represent distinct role names available within a context |
 | parents | No | `Set<HierarchicalEntity>` | Parent entities |
 
-> ? Usage
+> Usage
 
 ```typescript
 // Import or Require
@@ -40,5 +40,35 @@ const leaveEntity = new Context(
     'leave', // name
     ['leaveAdmin', 'leaveMember'], // roles
     new Set([rootEntity]), // parents
+);
+```
+
+## Product API
+The tangible entities within the application. 
+Unlike contexts, products do not have roles to claim; they are entities that are accessed and manipulated by actors based on their assigned roles and permissions within the respective contexts.
+
+> Constructor
+
+| Param | Required| Type | Description|
+|----------|----------|----------|----------|
+| name | Yes | `String` | The name of the product |
+| parents | No | `Set<HierarchicalEntity>` | Parent entities |
+
+> Usage
+
+```typescript
+// Import or Require
+import { Product } from '@cellajs/permission-manager';
+
+// In this example, productA is always attached to parent ContextA.
+const productA = new Product(
+    'productA', // name
+    new Set([contextA]), // parents
+);
+
+// ProductB will be polyhierarchically attached. It can be attached to either ContextA or ContextB.
+const productB = new Product(
+    'productB', // name
+    new Set([contextA, contextB]), // parents
 );
 ```
