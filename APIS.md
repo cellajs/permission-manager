@@ -10,12 +10,13 @@
 #### Contents
 - [Context API](#Context-API)
 - [Product API](#Product-API)
+- [PermissionManager API](#PermissionManager-API)
 
 ## Context API
 Recognizable entities within the application that maintain roles which can be claimed by actors.
 A Context is a subclass of a HierarchicalEntity.
 
-> Constructor
+> Context Constructor
 
 | Param | Required| Type | Description|
 |----------|----------|----------|----------|
@@ -23,7 +24,7 @@ A Context is a subclass of a HierarchicalEntity.
 | roles | Yes | `Array<String>` | These represent distinct role names available within a context |
 | parents | No | `Set<HierarchicalEntity>` | Parent entities |
 
-> Usage
+> Context Usage
 
 ```typescript
 import { Context } from '@cellajs/permission-manager';
@@ -50,14 +51,14 @@ The tangible entities within the application.
 Unlike contexts, products do not have roles to claim; they are entities that are accessed and manipulated by actors based on their assigned roles and permissions within the respective contexts.
 A Product is a subclass of a HierarchicalEntity.
 
-> Constructor
+> Product Constructor
 
 | Param | Required| Type | Description|
 |----------|----------|----------|----------|
 | name | Yes | `String` | The (unique) name of the product |
 | parents | No | `Set<HierarchicalEntity>` | Parent entities |
 
-> Usage
+> Product Usage
 
 ```typescript
 import { Product } from '@cellajs/permission-manager';
@@ -70,3 +71,22 @@ const productA = new Product(
 
 > ❗ It's recommended that products are always attached to at least one parent.
 
+
+## PermissionManager API
+The permission manager evaluates user permissions based on the established hierarchical structure and configured access policies.
+
+> PermissionManager Constructor
+
+| Param | Required| Type | Description|
+|----------|----------|----------|----------|
+| name | Yes | `String` | The (unique) name of the permission manager |
+
+> Usage
+
+```typescript
+import { PermissionManager } from '@cellajs/permission-manager';
+
+const permissionManager = new PermissionManager(
+    'guard', // name
+);
+```
