@@ -36,11 +36,48 @@ Implementing the Permission Manager involves 4 steps:
 
 | Step | Subject | Description |
 |----------|----------|----------|
-| 1 | Hierarchical structure | Define the hierarchical structure of your application, distinguishing between actors, contexts, roles, and products.|
-| 2 | Access Policies | Establish access policies based on a many-to-many relationship between different contexts and their corresponding roles, ensuring precise control over permissions. |
-| 3 | Adapters | Optionally configure adapters to seamlessly integrate the permission manager within your application ecosystem. |
-| 4 | Integrate | Integrate the permission manager into middleware layers or directly into application logic to enforce access control throughout the application's execution flow. |
+| 1 | *Hierarchical structure | Define the hierarchical structure of your application, distinguishing between actors, contexts, roles, and products.|
+| 2 | *Access Policies | Establish access policies based on a many-to-many relationship between different contexts and their corresponding roles, ensuring precise control over permissions. |
+| 3 | _Optional Adapters_ | Optionally configure adapters to seamlessly integrate the permission manager within your application ecosystem. |
+| 4 | *Integrate | Integrate the permission manager into middleware layers or directly into application logic to enforce access control throughout the application's execution flow. |
 
+```typescript
+// 1. Define Hierarchical Structure:
+import { Context, Product } from '@cellajs/permission-manager';
+
+const community = new Context('community', ['admin', 'member']);
+const subCommunity = new Context('subCommunity', ['follower'], new Set([community]));
+
+new Product('post', new Set([subCommunity]));
+
+// 2. Establish access policies:
+import { PermissionManager, AccessPolicyConfiguration } from '@cellajs/permission-manager';
+
+const permissionManager = new PermissionManager('permissionManager');
+permissionManager.accessPolicies.configureAccessPolicies(({ subject, contexts }: AccessPolicyConfiguration) => {
+    switch (subject.name) {
+      case 'community':
+        contexts.community.admin({ create: 0, read: 1, update: 1, delete: 0 });
+        contexts.community.member({ create: 0, read: 1, update: 0, delete: 0 });
+        break;
+      case 'subCommunity':
+        contexts.community.admin({ create: 1, read: 1, update: 1, delete: 1 });
+        contexts.subCommunity.follower({ create: 0, read: 1, update: 0, delete: 0 });
+        break;
+      case 'post':
+        contexts.community.admin({ create: 1, read: 1, update: 1, delete: 1 });
+        contexts.subCommunity.follower({ create: 1, read: 1, update: 0, delete: 0 });
+        break;
+    });
+
+// 4. Integrate into middleware layers
+const memberships = [{ contextName: 'community', contextKey: 1, roleName: 'admin', ancestors: {}}];
+const subject = { name: 'community', key: 1 };
+
+const isAllowed = permissionManager.isPermissionAllowed(memberships, 'read', subject);
+const canDo = permissionManager.getActorPolicies(memberships, subject);
+}
+```
 ## License
 MIT License
 
