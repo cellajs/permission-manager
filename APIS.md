@@ -16,7 +16,7 @@
 Recognizable entities within the application that maintain roles which can be claimed by actors.
 A Context is a subclass of a HierarchicalEntity.
 
-> Context: Constructor
+#### Constructor
 
 | Param | Required| Type | Description|
 |----------|----------|----------|----------|
@@ -24,7 +24,7 @@ A Context is a subclass of a HierarchicalEntity.
 | roles | Yes | `Array<String>` | These represent distinct role names available within a context |
 | parents | No | `Set<HierarchicalEntity>` | Parent entities |
 
-> Context: Usage
+#### Usage
 
 ```typescript
 import { Context } from '@cellajs/permission-manager';
@@ -40,7 +40,8 @@ const leaveEntity = new Context(
     new Set([rootEntity]), // parents
 );
 ```
-> Context: Extra info
+
+#### Extra info
 1. You don't need to specify the 'parents' parameter for a root entity in the hierarchical structure.
 2. You only need to specify the direct parent (excluding ancestors higher in the structure).
 3. Specifying multiple parents results in a polyhierarchical leaf node.
@@ -50,14 +51,14 @@ The tangible entities within the application.
 Unlike contexts, products do not have roles to claim; they are entities that are accessed and manipulated by actors based on their assigned roles and permissions within the respective contexts.
 A Product is a subclass of a HierarchicalEntity.
 
-> Product: Constructor
+#### Constructor
 
 | Param | Required| Type | Description|
 |----------|----------|----------|----------|
 | name | Yes | `String` | The (unique) name of the product |
 | parents | No | `Set<HierarchicalEntity>` | Parent entities |
 
-> Product: Usage
+#### Usage
 
 ```typescript
 import { Product } from '@cellajs/permission-manager';
@@ -68,7 +69,7 @@ const product = new Product(
 );
 ```
 
-> Context: Extra info
+#### Extra info
 1. It's recommended that products are always attached to at least one parent.
 
 
