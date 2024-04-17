@@ -117,6 +117,11 @@ The permission manager evaluates user permissions based on the established hiera
 | memberships | Yes | `Array<Any>` | The array of membership objects. The structure of each membership object may vary depending on the provided [MembershipAdapter](#MembershipAdapter-API). |
 | subject | Yes | `Any` | The subject object for which permission is being checked. The structure of the subject object may vary depending on the provided [SubjectAdapter](#SubjectAdapter-API). |
 
+#### Methods.accessPolicies.configureAccessPolicies
+| Param | Required| Type | Description|
+|----------|----------|----------|----------|
+| fnc | Yes | `Function` | The function to configure access policies. While be injected with [AccessPolicyConfiguration](#AccessPolicyConfiguration-API). |
+
 
 #### Usage
 
@@ -126,6 +131,8 @@ import { PermissionManager } from '@cellajs/permission-manager';
 const permissionManager = new PermissionManager(
     'guard', // name
 );
+
+permissionManager.accessPolicies.configureAccessPolicies((accessPolicyConfiguration: AccessPolicyConfiguration) => {});
 
 const isAllowed = permissionManager.isPermissionAllowed(Array<Membership>, action, Subject);
 const canDo = permissionManager.getActorPolicies(Array<Membership>, Subject);
