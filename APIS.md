@@ -9,6 +9,7 @@
 
 #### Contents
 - [Context API](#Context-API)
+- [Product API](#Product-API)
 
 ## Context API
 Recognizable entities within the application that maintain roles which can be claimed by actors.
@@ -18,7 +19,7 @@ A HierarchicalEntity serves as the superclass of both Context and Product.
 
 | Param | Required| Type | Description|
 |----------|----------|----------|----------|
-| name | Yes | `String` | The name of the context |
+| name | Yes | `String` | The (unique) name of the context |
 | roles | Yes | `Array<String>` | These represent distinct role names available within a context |
 | parents | No | `Set<HierarchicalEntity>` | Parent entities |
 
@@ -28,20 +29,22 @@ A HierarchicalEntity serves as the superclass of both Context and Product.
 // Import or Require
 import { Context } from '@cellajs/permission-manager';
 
-// Since this is the root entity in the Hierarchical Structure, the 'parents' parameter is not required.
 const rootEntity = new Context(
     'root', // name
     ['rootAdmin', 'rootMember'], // roles
 );
 
-// You only need to specify the direct parent.
-// Specifying multiple parents results in a polyhierarchical leaf node.
 const leaveEntity = new Context(
     'leave', // name
     ['leaveAdmin', 'leaveMember'], // roles
     new Set([rootEntity]), // parents
 );
 ```
+> ! You don't need to specify the 'parents' parameter for a root entity in the hierarchical structure.
+
+> ! You only need to specify the direct parent (excluding ancestors higher in the structure).
+
+> ! Specifying multiple parents results in a polyhierarchical leaf node.
 
 ## Product API
 The tangible entities within the application. 
@@ -51,7 +54,7 @@ Unlike contexts, products do not have roles to claim; they are entities that are
 
 | Param | Required| Type | Description|
 |----------|----------|----------|----------|
-| name | Yes | `String` | The name of the product |
+| name | Yes | `String` | The (unique) name of the product |
 | parents | No | `Set<HierarchicalEntity>` | Parent entities |
 
 > Usage
@@ -60,15 +63,10 @@ Unlike contexts, products do not have roles to claim; they are entities that are
 // Import or Require
 import { Product } from '@cellajs/permission-manager';
 
-// In this example, productA is always attached to parent ContextA.
 const productA = new Product(
     'productA', // name
     new Set([contextA]), // parents
 );
-
-// ProductB will be polyhierarchically attached. It can be attached to either ContextA or ContextB.
-const productB = new Product(
-    'productB', // name
-    new Set([contextA, contextB]), // parents
-);
 ```
+
+> ! It's recommended that products are always attached to at least one parent.
