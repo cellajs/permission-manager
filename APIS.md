@@ -22,7 +22,7 @@ A HierarchicalEntity serves as the superclass of both Context and Product.
 | roles | Yes | `Array<String>` | These represent distinct role names available within a context |
 | parents | No | `Set<HierarchicalEntity>` | Parent entities |
 
-> Usage
+> ? Usage
 
 ```typescript
 // Import or Require
