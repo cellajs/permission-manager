@@ -25,10 +25,9 @@ Interfaces:
 - [ActionPolicies API](#ActionPolicies-API)
 
 ## Context API
-> Type: Class
+> Type: Class (inherits from HierarchicalEntity)
 
 Recognizable entities within the application that maintain roles which can be claimed by actors.
-A Context is a subclass of a HierarchicalEntity.
 
 #### Constructor
 
@@ -61,11 +60,10 @@ const leaveEntity = new Context(
 3. Specifying multiple parents results in a polyhierarchical leaf node.
 
 ## Product API
-> Type: Class
+> Type: Class (inherits from HierarchicalEntity)
 
 The tangible entities within the application. 
 Unlike contexts, products do not have roles to claim; they are entities that are accessed and manipulated by actors based on their assigned roles and permissions within the respective contexts.
-A Product is a subclass of a HierarchicalEntity.
 
 #### Constructor
 
@@ -103,7 +101,7 @@ The permission manager evaluates user permissions based on the established hiera
 | Method | Returns | Description|
 |----------|----------|----------|
 | isPermissionAllowed | `Boolean` | Checks if a permission is allowed based on the provided memberships, action, and subject. Returns `true` if the action is allowed, `false` if not allowed. |
-| getActorPolicies | `ActionPolicies` | Retrieves the action policies for an actor based on the provided memberships and subject. |
+| getActorPolicies | [ActionPolicies](#ActionPolicies-API) | Retrieves the action policies for an actor based on the provided memberships and subject. |
 
 #### Methods.isPermissionAllowed
 | Param | Required| Type | Description|
@@ -142,7 +140,7 @@ This adapter is automatically utilized when instantiating an inherited class wit
 #### Abstract methods
 | Method | Returns | Description|
 |----------|----------|----------|
-| adapt | `Membership` | Transforms memberships from a custom format to the expected format for Membership. |
+| adapt | [Membership](#Membership-API) | Transforms memberships from a custom format to the expected format for Membership. |
 
 #### Abstract methods.adapt
 | Param | Required| Type | Description|
@@ -178,7 +176,7 @@ This adapter is automatically utilized when instantiating an inherited class wit
 #### Abstract methods
 | Method | Returns | Description|
 |----------|----------|----------|
-| adapt | `Subject` | Transforms subjects from a custom format to the expected format for Subject. |
+| adapt | [Subject](#Subject-API) | Transforms subjects from a custom format to the expected format for Subject. |
 
 #### Abstract methods.adapt
 | Param | Required| Type | Description|
@@ -208,7 +206,7 @@ new AdaptedSubjectAdapter();
 > Type: Interface
 
 The required format for memberships used by the Permission Manager. 
-This interface is utilized to configure the `MembershipAdapter`.
+This interface is utilized to configure the [MembershipAdapter](#MembershipAdapter-API).
 
 #### Attributes
 | Property | Type | Description|
@@ -236,7 +234,7 @@ This interface is utilized to configure the `MembershipAdapter`.
 > Type: Interface
 
 The required format for subjects used by the Permission Manager. 
-This interface is utilized to configure the `SubjectAdapter`.
+This interface is utilized to configure the [SubjectAdapter](#SubjectAdapter-API).
 
 #### Attributes
 | Property | Type | Description|
@@ -260,7 +258,7 @@ This interface is utilized to configure the `SubjectAdapter`.
 ## AccessPolicyConfiguration API
 > Type: Interface
 
-When configuring access policies through the `configureAccessPolicies` method exposed by the `PermissionManager`, a callback function will be injected with an `AccessPolicyConfiguration` instance.
+When configuring access policies through the `configureAccessPolicies` method exposed by the [PermissionManager](#PermissionManager-API), a callback function will be injected with an `AccessPolicyConfiguration` instance.
 This `AccessPolicyConfiguration` refers to the current access policy within the many-to-many relationship between different contexts and their corresponding roles."
 
 #### Attributes
@@ -272,7 +270,7 @@ This `AccessPolicyConfiguration` refers to the current access policy within the 
 #### Attributes.contexts<contextName>.<roleName>
 | Param | Required| Type | Description|
 |----------|----------|----------|----------|
-| policy | Yes | `ActionPolicies` | The access policy object. |
+| policy | Yes | [ActionPolicies](#ActionPolicies-API) | The access policy object. |
 
 
 #### Example
@@ -297,8 +295,8 @@ This `AccessPolicyConfiguration` refers to the current access policy within the 
 ## ActionPolicies API
 > Type: Interface
 
-The `getActorPolicies` method from the Permission Manager returns an object of `ActionPolicies`. 
-During the configuration of access policies using the `configureAccessPolicies` method exposed by the `PermissionManager`, the configurable role functions will expect an `ActionPolicies` object. 
+The `getActorPolicies` method from the [PermissionManager](#PermissionManager-API) returns an object of `ActionPolicies`. 
+During the configuration of access policies using the `configureAccessPolicies` method exposed by the [PermissionManager](#PermissionManager-API), the configurable role functions will expect an `ActionPolicies` object. 
 This object maps actions to allowances in a `Boolean` format.
 
 #### Attributes
