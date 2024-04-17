@@ -18,6 +18,6 @@ A HierarchicalEntity serves as the superclass of both Context and Product.
 
 | Param | Required| Type | Description|
 |----------|----------|----------|----------|
-| name | Yes | String | The name of the context |
-| roles | Yes | Array<String> | These represent distinct role names available within a context |
-| parents | No | Set<HierarchicalEntity> | Parent entities |
+| name | Yes | `String` | The name of the context |
+| roles | Yes | `Array<String>` | These represent distinct role names available within a context |
+| parents | No | `Set<HierarchicalEntity>` | Parent entities |
