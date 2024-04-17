@@ -175,7 +175,7 @@ This interface is utilized to configure the `MembershipAdapter`.
 
 #### Example
 ```typescript
-const membership = {
+{
   contextName: 'context',
   contextKey: '661fc4ead271ca753b45ac34',
   roleName: 'role',
@@ -202,7 +202,7 @@ This interface is utilized to configure the `SubjectAdapter`.
 
 #### Example
 ```typescript
-const subject = {
+{
   name: 'subject',
   key: '661fc31d1a90378c89d1636e',
   ancestors: {
@@ -214,3 +214,31 @@ const subject = {
 ```
 ## AccessPolicyConfiguration API
 > Type: Interface
+
+When configuring access policies through the `configureAccessPolicies` method exposed by the `PermissionManager`, a callback function will be injected with an `AccessPolicyConfiguration` instance.
+This `AccessPolicyConfiguration` refers to the current access policy within the many-to-many relationship between different contexts and their corresponding roles."
+
+#### Attributes
+| Property | Type | Description|
+|----------|----------|----------|
+| subject | `HierarchicalEntity` | An instance of a `HierarchicalEntity` |
+| contexts | `Object` | An object mapping context names to objects representing configurable roles as `Function`s|
+
+#### Example
+```typescript
+{
+  subject: {
+      name: 'subject',
+  },
+  contexts: {
+      contextA: {
+          'admin': /*AccessPolicyFunction*/ Function,
+          'follower': /*AccessPolicyFunction*/ Function,
+      },
+      contextB: {
+          'contributor': /*AccessPolicyFunction*/ Function,          
+          'sponsor': /*AccessPolicyFunction*/ Function,          
+      },
+  },
+};
+```
