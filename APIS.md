@@ -21,3 +21,24 @@ A HierarchicalEntity serves as the superclass of both Context and Product.
 | name | Yes | `String` | The name of the context |
 | roles | Yes | `Array<String>` | These represent distinct role names available within a context |
 | parents | No | `Set<HierarchicalEntity>` | Parent entities |
+
+> Usage
+
+```typescript
+// Import or Require
+import { Context } from '@cellajs/permission-manager';
+
+// Since this is the root entity in the Hierarchical Structure, the 'parents' parameter is not required.
+const rootEntity = new Context(
+    'root', // name
+    ['rootAdmin', 'rootMember'], // roles
+);
+
+// You only need to specify the direct parent.
+// Specifying multiple parents results in a polyhierarchical leaf node.
+const leaveEntity = new Context(
+    'leave', // name
+    ['leaveAdmin', 'leaveMember'], // roles
+    new Set([rootEntity]), // parents
+);
+```
