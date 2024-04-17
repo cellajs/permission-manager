@@ -8,11 +8,23 @@
 </div>
 
 #### Contents
+Classes:
 - [Context API](#Context-API)
 - [Product API](#Product-API)
 - [PermissionManager API](#PermissionManager-API)
 
+Abstract classes:
+- [MembershipAdapter API](#MembershipAdapter-API)
+- [SubjectAdapter API](#SubjectAdapter-API)
+
+Interfaces:
+- [AccessPolicyConfiguration API](#AccessPolicyConfiguration-API)
+- [Membership API](#Membership-API)
+- [Subject API](#Subject-API)
+
 ## Context API
+> Type: Class
+
 Recognizable entities within the application that maintain roles which can be claimed by actors.
 A Context is a subclass of a HierarchicalEntity.
 
@@ -47,6 +59,8 @@ const leaveEntity = new Context(
 3. Specifying multiple parents results in a polyhierarchical leaf node.
 
 ## Product API
+> Type: Class
+
 The tangible entities within the application. 
 Unlike contexts, products do not have roles to claim; they are entities that are accessed and manipulated by actors based on their assigned roles and permissions within the respective contexts.
 A Product is a subclass of a HierarchicalEntity.
@@ -72,17 +86,18 @@ const product = new Product(
 #### Extra info
 1. It's recommended that products are always attached to at least one parent.
 
-
 ## PermissionManager API
+> Type: Class
+
 The permission manager evaluates user permissions based on the established hierarchical structure and configured access policies.
 
-> PermissionManager: Constructor
+#### Constructor
 
 | Param | Required| Type | Description|
 |----------|----------|----------|----------|
 | name | Yes | `String` | The (unique) name of the permission manager |
 
-> PermissionManager: Usage
+#### Usage
 
 ```typescript
 import { PermissionManager } from '@cellajs/permission-manager';
@@ -92,3 +107,17 @@ const permissionManager = new PermissionManager(
 );
 ```
 
+## MembershipAdapter API
+> Type: Abstract class
+
+## SubjectAdapter API
+> Type: Abstract class
+
+## Subject API
+> Type: Interface
+
+## Membership API
+> Type: Interface
+
+## AccessPolicyConfiguration API
+> Type: Interface
