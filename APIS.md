@@ -40,11 +40,10 @@ const leaveEntity = new Context(
     new Set([rootEntity]), // parents
 );
 ```
-> *You don't need to specify the 'parents' parameter for a root entity in the hierarchical structure.
-
-> *You only need to specify the direct parent (excluding ancestors higher in the structure).
-
-> *Specifying multiple parents results in a polyhierarchical leaf node.
+> Context: Extra info
+1. You don't need to specify the 'parents' parameter for a root entity in the hierarchical structure.
+2. You only need to specify the direct parent (excluding ancestors higher in the structure).
+3. Specifying multiple parents results in a polyhierarchical leaf node.
 
 ## Product API
 The tangible entities within the application. 
@@ -69,7 +68,8 @@ const product = new Product(
 );
 ```
 
-> *It's recommended that products are always attached to at least one parent.
+> Context: Extra info
+1. It's recommended that products are always attached to at least one parent.
 
 
 ## PermissionManager API
