@@ -99,10 +99,24 @@ The permission manager evaluates user permissions based on the established hiera
 | name | Yes | `String` | The (unique) name of the permission manager |
 
 #### Methods
-| Method | Description|
-|----------|----------|
-| isPermissionAllowed | Checks if a permission is allowed based on the provided memberships, action, and subject. |
-| getActorPolicies | Retrieves the action policies for an actor based on the provided memberships and subject. |
+| Method | Returns | Description|
+|----------|----------|----------|
+| isPermissionAllowed | `Boolean` | Checks if a permission is allowed based on the provided memberships, action, and subject. , Return `true` if the action is allowed, `false` if not allowed. |
+| getActorPolicies | `ActionPolicies` | Retrieves the action policies for an actor based on the provided memberships and subject. |
+
+#### Methods.isPermissionAllowed
+| Param | Required| Type | Description|
+|----------|----------|----------|----------|
+| memberships | Yes | `Array<Any>` | The array of membership objects. The structure of each membership object may vary depending on the provided adapter. |
+| action | Yes | `String` | The action for which permission is being checked. |
+| subject | Yes | `Any` | The subject object for which permission is being checked. The structure of the subject object may vary depending on the provided adapter. |
+
+#### Methods.getActorPolicies
+| Param | Required| Type | Description|
+|----------|----------|----------|----------|
+| memberships | Yes | `Array<Any>` | The array of membership objects. The structure of each membership object may vary depending on the provided adapter. |
+| subject | Yes | `Any` | The subject object for which permission is being checked. The structure of the subject object may vary depending on the provided adapter. |
+
 
 #### Usage
 
@@ -125,9 +139,14 @@ To simplify this conversion process, you can configure the MembershipAdapter tha
 This adapter is automatically utilized when instantiating an inherited class with an overridden `adapt` method.
 
 #### Abstract methods
-| Method | Description|
-|----------|----------|
-| adapt | Transforms memberships from a custom format to the expected format for Membership. |
+| Method | Returns | Description|
+|----------|----------|----------|
+| adapt | `Membership` | Transforms memberships from a custom format to the expected format for Membership. |
+
+#### Abstract methods.adapt
+| Param | Required| Type | Description|
+|----------|----------|----------|----------|
+| memberships | Yes | `Array<Any>` | The array of membership objects in custom format. |
 
 #### Usage
 
@@ -156,9 +175,15 @@ To simplify this conversion process, you can configure the SubjectAdapter to aut
 This adapter is automatically utilized when instantiating an inherited class with an overridden `adapt` method.
 
 #### Abstract methods
-| Method | Description|
-|----------|----------|
-| adapt | Transforms subjects from a custom format to the expected format for Subject. |
+| Method | Returns | Description|
+|----------|----------|----------|
+| adapt | `Subject` | Transforms subjects from a custom format to the expected format for Subject. |
+
+#### Abstract methods.adapt
+| Param | Required| Type | Description|
+|----------|----------|----------|----------|
+| memberships | Yes | `Any` | The subject in custom format. |
+
 
 #### Usage
 

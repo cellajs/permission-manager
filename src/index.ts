@@ -1395,7 +1395,7 @@ export class PermissionManager {
 
   /**
    * Checks if a permission is allowed based on the provided memberships, action, and subject.
-   * @param {Membership[]} memberships - The array ofaccessPolicyKeys membership objects.
+   * @param {Membership[]} memberships - The array membership objects.
    * @param {string} action - The action for which permission is being checked.
    * @param {Subject} subject - The subject for which permission is being checked.
    * @returns {boolean} Returns true if the action is allowed, false if not allowed.
