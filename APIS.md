@@ -134,7 +134,7 @@ const canDo = permissionManager.getActorPolicies(Array<Membership>, Subject);
 ## MembershipAdapter API
 > Type: Abstract class
 
-The permission manager requires a specific format for memberships. 
+The permission manager requires a specific format for memberships.
 To simplify this conversion process, you can configure the MembershipAdapter that automatically transform your memberships into the required format. 
 This adapter is automatically utilized when instantiating an inherited class with an overridden `adapt` method.
 
@@ -182,7 +182,7 @@ This adapter is automatically utilized when instantiating an inherited class wit
 #### Abstract methods.adapt
 | Param | Required| Type | Description|
 |----------|----------|----------|----------|
-| memberships | Yes | `Any` | The subject in custom format. |
+| subject | Yes | `Any` | The subject in custom format. |
 
 
 #### Usage
