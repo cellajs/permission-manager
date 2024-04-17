@@ -126,7 +126,7 @@ The permission manager evaluates user permissions based on the established hiera
 #### Usage
 
 ```typescript
-import { PermissionManager } from '@cellajs/permission-manager';
+import { PermissionManager, AccessPolicyConfiguration } from '@cellajs/permission-manager';
 
 const permissionManager = new PermissionManager(
     'guard', // name
