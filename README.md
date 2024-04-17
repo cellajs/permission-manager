@@ -38,7 +38,7 @@ Implementing the Permission Manager involves 4 steps:
 |----------|----------|----------|
 | 1 | *Hierarchical structure | Define the hierarchical structure of your application, distinguishing between actors, contexts, roles, and products.|
 | 2 | *Access Policies | Establish access policies based on a many-to-many relationship between different contexts and their corresponding roles, ensuring precise control over permissions. |
-| 3 | _Optional Adapters_ | Optionally configure adapters to seamlessly integrate the permission manager within your application ecosystem. |
+| 3 | _(Optional)_ Adapters | Optionally configure adapters to seamlessly integrate the permission manager within your application ecosystem. |
 | 4 | *Integrate | Integrate the permission manager into middleware layers or directly into application logic to enforce access control throughout the application's execution flow. |
 
 ```typescript
