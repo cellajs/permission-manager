@@ -19,9 +19,9 @@ Abstract classes:
 - [SubjectAdapter API](#SubjectAdapter-API)
 
 Interfaces:
-- [AccessPolicyConfiguration API](#AccessPolicyConfiguration-API)
 - [Membership API](#Membership-API)
 - [Subject API](#Subject-API)
+- [AccessPolicyConfiguration API](#AccessPolicyConfiguration-API)
 
 ## Context API
 > Type: Class
