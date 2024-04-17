@@ -76,7 +76,10 @@ permissionManager.accessPolicies.configureAccessPolicies(({ subject, contexts }:
         contexts.community.admin({ create: 1, read: 1, update: 1, delete: 1 });
         contexts.subCommunity.follower({ create: 1, read: 1, update: 0, delete: 0 });
         break;
-    });
+    };
+});
+
+// 3. Optionally configure adapters (see API's documentation)
 
 // 4. Integrate into middleware layers
 const memberships = [{ contextName: 'community', contextKey: 1, roleName: 'admin', ancestors: {}}];
