@@ -106,15 +106,15 @@ The permission manager evaluates user permissions based on the established hiera
 #### Methods.isPermissionAllowed
 | Param | Required| Type | Description|
 |----------|----------|----------|----------|
-| memberships | Yes | `Array<Any>` | The array of membership objects. The structure of each membership object may vary depending on the provided adapter. |
+| memberships | Yes | `Array<Any>` | The array of membership objects. The structure of each membership object may vary depending on the provided [MembershipAdapter](#MembershipAdapter-API). |
 | action | Yes | `String` | The action for which permission is being checked. |
-| subject | Yes | `Any` | The subject object for which permission is being checked. The structure of the subject object may vary depending on the provided adapter. |
+| subject | Yes | `Any` | The subject object for which permission is being checked. The structure of the subject object may vary depending on the provided [SubjectAdapter](#SubjectAdapter-API). |
 
 #### Methods.getActorPolicies
 | Param | Required| Type | Description|
 |----------|----------|----------|----------|
-| memberships | Yes | `Array<Any>` | The array of membership objects. The structure of each membership object may vary depending on the provided adapter. |
-| subject | Yes | `Any` | The subject object for which permission is being checked. The structure of the subject object may vary depending on the provided adapter. |
+| memberships | Yes | `Array<Any>` | The array of membership objects. The structure of each membership object may vary depending on the provided [MembershipAdapter](#MembershipAdapter-API). |
+| subject | Yes | `Any` | The subject object for which permission is being checked. The structure of the subject object may vary depending on the provided [SubjectAdapter](#SubjectAdapter-API). |
 
 
 #### Usage
