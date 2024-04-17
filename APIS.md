@@ -101,7 +101,7 @@ The permission manager evaluates user permissions based on the established hiera
 #### Methods
 | Method | Returns | Description|
 |----------|----------|----------|
-| isPermissionAllowed | `Boolean` | Checks if a permission is allowed based on the provided memberships, action, and subject. , Return `true` if the action is allowed, `false` if not allowed. |
+| isPermissionAllowed | `Boolean` | Checks if a permission is allowed based on the provided memberships, action, and subject. Returns `true` if the action is allowed, `false` if not allowed. |
 | getActorPolicies | `ActionPolicies` | Retrieves the action policies for an actor based on the provided memberships and subject. |
 
 #### Methods.isPermissionAllowed
