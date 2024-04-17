@@ -41,6 +41,9 @@ Implementing the Permission Manager involves 4 steps:
 | 3 | _(Optional)_ Adapters | Optionally configure adapters to seamlessly integrate the permission manager within your application ecosystem. |
 | 4 | *Integrate | Integrate the permission manager into middleware layers or directly into application logic to enforce access control throughout the application's execution flow. |
 
+> ❗ During the setup of your application, it's recommended to import and configure the permission manager to establish access control mechanisms. 
+This ensures that access to different parts of your application is properly regulated based on predefined roles and permissions.
+
 ```typescript
 // 1. Define Hierarchical Structure:
 import { Context, Product } from '@cellajs/permission-manager';
