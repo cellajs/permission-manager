@@ -15,6 +15,7 @@
 #### Contents
 - [Description](#Description)
 - [Installation](#Installation)
+- [Quick Start](#Quick)
 - [License](#License)
 
 ## Description
@@ -29,6 +30,7 @@ Install the module via npm:
 npm install --save @cellajs/permission-manager
 ```
 
+## Quick Start
 
 ## License
 MIT License
