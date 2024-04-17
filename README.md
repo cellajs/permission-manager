@@ -32,7 +32,9 @@ npm install --save @cellajs/permission-manager
 
 ## Quick Start
 
-| Step | Action | Description |
+Implementing the Permission Manager involves 4 steps:
+
+| Step | Subject | Description |
 |----------|----------|----------|
 | 1 | Hierarchical structure | Define the hierarchical structure of your application, distinguishing between actors, contexts, roles, and products.|
 | 2 | Access Policies | Establish access policies based on a many-to-many relationship between different contexts and their corresponding roles, ensuring precise control over permissions. |
