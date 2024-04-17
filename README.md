@@ -16,6 +16,7 @@
 - [Description](#Description)
 - [Installation](#Installation)
 - [Quick Start](#Quick-Start)
+- [Roadmap](#Roadmap)
 - [License](#License)
 
 #### Additional Resources
@@ -85,6 +86,18 @@ const isAllowed = permissionManager.isPermissionAllowed(memberships, 'read', sub
 const canDo = permissionManager.getActorPolicies(memberships, subject);
 }
 ```
+
+## Roadmap
+Here are the future steps planned for the development of this project:
+
+- **Add tests:** Implement comprehensive testing to ensure code stability and reliability.
+  
+- **Create more attribute-based features:** Expand the functionality of the project by introducing additional attribute-based features.
+
+- **Write technical documentation:** Document the technical aspects of the project to facilitate understanding and collaboration among developers.
+
+- **Create documentation for different complex implementations:** Provide documentation for various complex implementations to assist users in understanding and utilizing advanced features.
+
 
 ## License
 MIT License
