@@ -18,6 +18,10 @@
 - [Quick Start](#Quick-Start)
 - [License](#License)
 
+#### Additional Resources
+> Explore more detailed documentation and resources to enhance your understanding and implementation of the Permission Manager module.
+- [Apis](APIS.md)
+
 ## Description
 The permission-manager is a tool designed to facilitate Role-Based Access Control (RBAC) and Attribute-Based Access Control (ABAC) permissions within a hierarchical application structure. 
 
@@ -81,6 +85,7 @@ const isAllowed = permissionManager.isPermissionAllowed(memberships, 'read', sub
 const canDo = permissionManager.getActorPolicies(memberships, subject);
 }
 ```
+
 ## License
 MIT License
 
