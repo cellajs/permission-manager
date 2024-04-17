@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[cellajs.com](https://cellajs.com) &centerdot; prerelease version &centerdot; MIT license
+[cellajs.com](https://cellajs.com) &centerdot; prerelease version &centerdot; MIT license &centerdot; ![Dutch](https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/nl.png) ![Europe](https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/europeanunion.png)
 
 ![Node.js](https://img.shields.io/badge/Node.js-%2343853D?logo=node.js&logoColor=white) &middot; ![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC?logo=typescript&logoColor=white)
 
