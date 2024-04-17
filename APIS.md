@@ -8,6 +8,10 @@
 
 </div>
 
+> ❗ The permission manager exposes more classes, interfaces, types, and functions than listed in this document. 
+However, this document primarily focuses on the essential classes and interfaces required for integration. 
+For a comprehensive understanding of all available features and functionalities, please explore the source code.
+
 #### Contents
 Classes:
 - [Context API](#Context-API)
