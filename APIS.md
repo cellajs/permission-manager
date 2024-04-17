@@ -110,8 +110,49 @@ const permissionManager = new PermissionManager(
 ## MembershipAdapter API
 > Type: Abstract class
 
+The permission manager requires a specific format for memberships. 
+To simplify this conversion process, you can configure the MembershipAdapter that automatically transform your memberships into the required format. 
+This adapter is automatically utilized when instantiating an inherited class with an overridden `adapt` method.
+
+```typescript
+import { MembershipAdapter, Membership } from '@cellajs/permission-manager';
+
+class AdaptedMembershipAdapter extends MembershipAdapter {
+    adapt(memberships: any[]): Membership[] {
+        return memberships.map((m) => ({
+            contextName: m.type,
+            contextKey: m.key,
+            roleName: m.role,
+            ancestors: m.ancestors || {}
+        }));
+    }
+}
+
+new AdaptedMembershipAdapter();
+```
+
 ## SubjectAdapter API
 > Type: Abstract class
+
+The permission manager requires a specific format for subjects. 
+To simplify this conversion process, you can configure the SubjectAdapter to automatically transform your subjects into the required format.
+This adapter is automatically utilized when instantiating an inherited class with an overridden `adapt` method.
+
+```typescript
+import { SubjectAdapter, Subject } from '@cellajs/permission-manager';
+
+class AdaptedSubjectAdapter extends SubjectAdapter {
+    adapt(s: any): Subject {
+        return {
+            name: s.type,
+            key: s.key,
+            ancestors: s.ancestors || {}
+        };
+    }
+}
+
+new AdaptedSubjectAdapter();
+```
 
 ## Subject API
 > Type: Interface
