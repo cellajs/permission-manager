@@ -8,24 +8,37 @@
   "description": "Permission manager to formulate abac and rbac policies in typescript projects that have a hierarchical structure.",
   "author": "CellaJS <info@cellajs.com>",
   "homepage": "https://cellajs.com",
-  "keywords": ["abac", "rbac", "typescript", "permissions", "access control", "authorization"],
+  "keywords": [
+    "abac",
+    "rbac",
+    "typescript",
+    "permissions",
+    "access control",
+    "authorization"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "files": ["dist", "src"],
+  "type": "module",
+  "files": [
+    "dist",
+    "src"
+  ],
   "engines": {
     "node": ">=20.9.0"
   },
   "scripts": {
     "build": "tsup src/index.ts",
     "dev": "tsup --watch --onSuccess \"tsx dist/index.cjs\"",
+    "test": "tap run __tests__/index.test.ts",
     "check": "npx @biomejs/biome check .",
     "check:fix": "npx @biomejs/biome check --apply ."
   },
   "devDependencies": {
     "@biomejs/biome": "1.6.2",
     "@evilmartians/lefthook": "^1.6.7",
-    "@types/node": "^20.11.30"
+    "@types/node": "^20.11.30",
+    "tap": "^18.7.2"
   },
   "license": "MIT",
   "dependencies": {

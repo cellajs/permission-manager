@@ -8,6 +8,9 @@ node_modules
 *.log*
 logs
 
+# Test
+.tap
+
 # Environment
 *.env*
 
