@@ -4,7 +4,7 @@
 
 [cellajs.com](https://cellajs.com) &centerdot; prerelease version &centerdot; MIT license &centerdot; ![Dutch](https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/nl.png) ![Europe](https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/europeanunion.png)
 
-![Node.js](https://img.shields.io/badge/Node.js-%2343853D?logo=node.js&logoColor=white) &middot; ![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC?logo=typescript&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-%2343853D?logo=node.js&logoColor=white) &middot; ![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC?logo=typescript&logoColor=white) &middot; ![Tap.js](https://img.shields.io/badge/Tap.js-%23375A81?logo=tap&logoColor=white)
 
 </div>
 
@@ -15,6 +15,7 @@
 #### Contents
 - [Description](#Description)
 - [Installation](#Installation)
+- [Test](#Test)
 - [Quick Start](#Quick-Start)
 - [Roadmap](#Roadmap)
 - [License](#License)
@@ -33,6 +34,12 @@ This first release is primarily integrated with [cella.js](https://cellajs.com/a
 Install the module via npm:
 ```bash
 npm install --save @cellajs/permission-manager
+```
+
+## Test
+Run tests with npm:
+```bash
+npm run test
 ```
 
 ## Quick Start
